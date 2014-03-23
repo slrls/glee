@@ -1,3 +1,12 @@
+var closeGlee = function (e, glee) {
+  e.preventDefault();
+
+  if (!glee.value())
+    glee.close();
+  else
+    glee.empty();
+};
+
 Glee.Events = {
   /**
     *  When a key is pressed down inside gleeBox
@@ -5,12 +14,7 @@ Glee.Events = {
   onKeyDown: function(e) {
     //  esc: hide gleeBox if empty. otherwise, empty gleeBox
     if (e.keyCode === 27) {
-      e.preventDefault();
-
-      if (!Glee.value())
-        Glee.close();
-      else
-        Glee.empty();
+      closeGlee(e, Glee);
     }
 
     //  tab: Scroll between elements / bookmarks
@@ -64,11 +68,11 @@ Glee.Events = {
       Glee.Browser.copyToClipboard(Utils.makeURLAbsolute(Glee.URL, location.href));
     }
 
-    //  Backspace takes user back in history if gleeBox is empty
+    //  Prevent going back in browser when holding backspace
     else if (e.keyCode === 8) {
-      // if the user is not holding the backspace key or ragepressing it
+      // only close gleeBox when user isn't holding down backspace
       if (!Glee.isDeleting && Glee.isEmpty())
-        window.history.back();
+         closeGlee(e, Glee);
 
       Glee.isDeleting = true;
     }

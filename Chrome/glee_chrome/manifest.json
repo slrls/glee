@@ -1,8 +1,9 @@
 {
-  "name": "gleeBox",
-  "version": "2.2.3",
+  "manifest_version": 2,
+  "name": "gleeBox-slr",
+  "version": "2.2.4",
   "description": "Keyboard glee for your web",
-  "background_page": "background.html",
+  "background": {"page": "background.html"},
   "options_page": "options.html",
 
   "icons": {
